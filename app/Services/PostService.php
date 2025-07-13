@@ -10,7 +10,8 @@ use App\Exceptions\CustomException;
 class PostService
 {
     /**
-     * دریافت لیست پست‌ها
+     * Get all posts
+     *
      * @return Collection
      */
     public function getAll(): Collection
@@ -19,7 +20,8 @@ class PostService
     }
 
     /**
-     * ایجاد پست جدید
+     * Create new post
+     *
      * @param array $data
      * @return Post
      * @throws CustomException
