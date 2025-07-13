@@ -5,16 +5,20 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 
-Route::get('/posts', [PostController::class, 'index']);
+Route::prefix('posts')->as('post.')->controller(PostController::class)->group(function () {
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/', 'index')->name('index');
+
+    Route::post('/store', 'store')->middleware(['auth:sanctum'])->name('store');
+
 });
 
+//get user data for test
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//get user token for test
 Route::get('/auth', function () {
     $user = \App\Models\User::whereEmail('test@example.com')->first()->createToken('myapp');
     return $user;
