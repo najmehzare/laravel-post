@@ -10,6 +10,10 @@ Route::prefix('posts')->as('post.')->controller(PostController::class)->group(fu
     Route::get('/', 'index')
         ->name('index');
 
+    Route::get('/search', 'search')
+        ->name('search');
+
+
     Route::post('/store', 'store')
         ->middleware('permission:post_store')
         ->middleware(['auth:sanctum'])
@@ -24,6 +28,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 //get user token for test
 Route::get('/auth', function () {
-    $user = \App\Models\User::whereEmail('admin@example.com')->first()->createToken('myapp');
+    $user = \App\Models\User::whereEmail('tester@example.com')->first()->createToken('myapp');
     return $user;
 });
